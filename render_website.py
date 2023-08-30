@@ -6,7 +6,7 @@ from more_itertools import chunked
 
 def refresh_website():
 
-    with open("books_info.json", "r", encoding='utf-8') as file:
+    with open("media/books_info.json", "r", encoding='utf-8') as file:
         books_json = file.read()
     books = json.loads(books_json)
 
