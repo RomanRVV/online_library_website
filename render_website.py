@@ -1,20 +1,29 @@
 import json
 from pprint import pprint
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from livereload import Server, shell
 
-with open("books_info.json", "r", encoding='utf-8') as file:
-    books_json = file.read()
 
-books = json.loads(books_json)
+def refresh_website():
 
-env = Environment(
-    loader=FileSystemLoader('.'),
-    autoescape=select_autoescape(['html', 'xml'])
-)
+    with open("books_info.json", "r", encoding='utf-8') as file:
+        books_json = file.read()
+    books = json.loads(books_json)
 
-template = env.get_template('template.html')
+    env = Environment(
+        loader=FileSystemLoader('.'),
+        autoescape=select_autoescape(['html', 'xml'])
+    )
 
-rendered_page = template.render(books=books)
+    template = env.get_template('template.html')
+    rendered_page = template.render(books=books)
 
-with open('index.html', 'w', encoding="utf8") as file:
-    file.write(rendered_page)
+    with open('index.html', 'w', encoding="utf8") as file:
+        file.write(rendered_page)
+
+
+refresh_website
+
+server = Server()
+server.watch('template.html', refresh_website)
+server.serve(root='.')
