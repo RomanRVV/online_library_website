@@ -11,23 +11,28 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    {% for book in books%}
-      <div class="card mb-3" style="max-width: 540px;">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <img src="{{book.image_url}}" class="card-img" alt="Обложка книги: {{book.title}}">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">{{book.title}}</h5>
-              <p class="card-text">{{book.author}}</p>
-              <p class="card-text"><small class="text-muted"></small></p>
+    <div class="container">
+      {% for books in books_by_columns %}
+        <div class="row">
+          {% for book in books %}
+            <div class="card mb-3" style="max-width: 400px;">
+              <div class="row no-gutters">
+                <div class="col-md-4">
+                  <img src="{{ book.image_url }}" class="card-img" alt="Обложка книги: {{ book.title }}">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text">{{ book.author }}</p>
+                    <p class="card-text"><small class="text-muted"></small></p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          {% endfor %}
         </div>
-      </div>
-    {% endfor %}
-
+      {% endfor %}
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

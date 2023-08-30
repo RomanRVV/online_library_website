@@ -2,7 +2,7 @@ import json
 from pprint import pprint
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server, shell
-
+from more_itertools import chunked
 
 def refresh_website():
 
@@ -16,7 +16,8 @@ def refresh_website():
     )
 
     template = env.get_template('template.html')
-    rendered_page = template.render(books=books)
+    books_by_columns = chunked(books, 2)
+    rendered_page = template.render(books_by_columns=books_by_columns)
 
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
