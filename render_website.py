@@ -13,7 +13,7 @@ def refresh_website():
     all_books = json.loads(books_json)
 
     os.makedirs('pages', exist_ok=True)
-    pages = chunked(all_books, 20)
+    pages = list(chunked(all_books, 20))
 
     env = Environment(
         loader=FileSystemLoader('.'),
@@ -23,7 +23,10 @@ def refresh_website():
     template = env.get_template('template.html')
     for page_number, books in enumerate(pages):
         books_by_columns = chunked(books, 2)
-        rendered_page = template.render(books_by_columns=books_by_columns)
+        rendered_page = template.render(books_by_columns=books_by_columns,
+                                        page_number=page_number,
+                                        number_of_pages=len(pages))
+        print(len(pages))
         page_path = f'pages/index{page_number}.html'
 
         with open(page_path, 'w', encoding="utf8") as file:
