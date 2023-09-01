@@ -1,5 +1,4 @@
 import json
-from pprint import pprint
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
 from more_itertools import chunked
@@ -32,8 +31,13 @@ def refresh_website():
             file.write(rendered_page)
 
 
-refresh_website
+def main():
+    refresh_website
 
-server = Server()
-server.watch('template.html', refresh_website)
-server.serve(root='.')
+    server = Server()
+    server.watch('template.html', refresh_website)
+    server.serve(root='.')
+
+
+if __name__ == '__main__':
+    main()
