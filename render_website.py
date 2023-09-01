@@ -26,7 +26,6 @@ def refresh_website():
         rendered_page = template.render(books_by_columns=books_by_columns,
                                         page_number=page_number,
                                         number_of_pages=len(pages))
-        print(len(pages))
         page_path = f'pages/index{page_number}.html'
 
         with open(page_path, 'w', encoding="utf8") as file:
