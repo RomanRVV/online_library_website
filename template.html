@@ -49,7 +49,7 @@
             <div class="card mx-4" style="width: 500px;">
               <div class="row no-gutters">
                 <div class="col-md-4">
-                  <img src="../media/images/{{ book.image_name }}" class="card-img" alt="Обложка книги: {{ book.title }}">
+                  <img src="{{ '../media/images/' ~ book.image_name | urlencode }}" class="card-img" alt="Обложка книги: {{ book.title }}">
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
@@ -58,7 +58,7 @@
                       {% for genre in book.genres %}
                         <span class="badge badge-light">{{ genre }}</span>
                       {% endfor %}
-                    <a href="../media/books/{{ book.title }}.txt" target="_blank">Читать</a>
+                    <a href="{{ '../media/books/' ~ book.title | urlencode }}.txt" target="_blank">Читать</a>
                   </div>
                 </div>
               </div>
