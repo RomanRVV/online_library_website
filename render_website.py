@@ -10,11 +10,11 @@ from more_itertools import chunked
 def refresh_website(path):
 
     with open(path, "r", encoding='utf-8') as file:
-        books_json = file.read()
-    all_books = json.loads(books_json)
-
+        all_books = json.load(file)
     os.makedirs('pages', exist_ok=True)
-    pages = list(chunked(all_books, 20))
+
+    books_per_page = 20
+    pages = list(chunked(all_books, books_per_page))
 
     env = Environment(
         loader=FileSystemLoader('.'),
@@ -23,7 +23,8 @@ def refresh_website(path):
 
     template = env.get_template('template.html')
     for page_number, books in enumerate(pages):
-        books_by_columns = chunked(books, 2)
+        number_of_chunks = 2
+        books_by_columns = chunked(books, number_of_chunks)
         rendered_page = template.render(books_by_columns=books_by_columns,
                                         page_number=page_number,
                                         number_of_pages=len(pages))
