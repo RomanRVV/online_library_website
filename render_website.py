@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 
@@ -6,9 +7,9 @@ from livereload import Server
 from more_itertools import chunked
 
 
-def refresh_website():
+def refresh_website(path):
 
-    with open("media/books_info.json", "r", encoding='utf-8') as file:
+    with open(path, "r", encoding='utf-8') as file:
         books_json = file.read()
     all_books = json.loads(books_json)
 
@@ -33,7 +34,13 @@ def refresh_website():
 
 
 def main():
-    refresh_website
+    parser = argparse.ArgumentParser(description='Скрипт создает статический сайт')
+    parser.add_argument('--path',
+                        help='укажите путь к json файлу',
+                        default='media/books_info.json')
+    args = parser.parse_args()
+
+    refresh_website(args.path)
 
     server = Server()
     server.watch('template.html', refresh_website)
