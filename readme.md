@@ -31,5 +31,17 @@ pip install -r requirements.txt
 python render_website.py
 ```
 
+
+Также вы можете указать путь к JSON файлу с данными о книгах
+(по умолчанию 'media/books_info.json')
+```sh
+python render_website.py --path путь к файлу
+```
+
+После запуска скрипта html страницы сохранятся в папку `pages`, а сайт будет доступен по адреу http://127.0.0.1:5500
+
+### Запуск оффлайн библиотеки
+Для запуска библиотеки в режиме офлайн, нужно перейти в папку `pages` и открыть любой index.html
+
 [Пример готового сайта на GitHub Pages](https://romanrvv.github.io/online_library_website/pages/index0.html) 
 
