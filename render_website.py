@@ -9,7 +9,7 @@ from more_itertools import chunked
 
 def refresh_website(path):
 
-    with open(path, "r", encoding='utf-8') as file:
+    with open(path, 'r', encoding='utf-8') as file:
         all_books = json.load(file)
     os.makedirs('pages', exist_ok=True)
 
@@ -30,7 +30,7 @@ def refresh_website(path):
                                         number_of_pages=len(pages))
         page_path = f'pages/index{page_number}.html'
 
-        with open(page_path, 'w', encoding="utf8") as file:
+        with open(page_path, 'w', encoding='utf8') as file:
             file.write(rendered_page)
 
 
