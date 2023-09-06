@@ -31,4 +31,5 @@ pip install -r requirements.txt
 python render_website.py
 ```
 
+[Пример готового сайта на GitHub Pages](https://romanrvv.github.io/online_library_website/pages/index0.html) 
 
