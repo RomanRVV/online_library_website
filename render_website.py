@@ -22,7 +22,7 @@ def refresh_website(path):
     )
 
     template = env.get_template('template.html')
-    for page_number, books in enumerate(pages):
+    for page_number, books in enumerate(pages, start=1):
         number_of_chunks = 2
         books_by_columns = chunked(books, number_of_chunks)
         rendered_page = template.render(books_by_columns=books_by_columns,
