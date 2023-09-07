@@ -5,6 +5,7 @@ import os
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
 from more_itertools import chunked
+from functools import partial
 
 
 def refresh_website(path):
@@ -41,10 +42,11 @@ def main():
                         default='media/books_info.json')
     args = parser.parse_args()
 
-    refresh_website(args.path)
+    update_site = partial(refresh_website, path=args.path)
+    update_site()
 
     server = Server()
-    server.watch('template.html', refresh_website)
+    server.watch('template.html', update_site)
     server.serve(root='.')
 
 
